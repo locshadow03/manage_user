@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" th:href="@{/dist/bootstrapdist/css/bootstrap.min.css}" >
+    <link th:href = "@{/dist/bootstrap-icons/font/bootstrap-icons.min.css}" rel="stylesheet">
+    <script rel = "stylesheet" th:src="@{/dist/bootstrapdist/js/bootstrap.bundle.min.js}"></script>
+    <link rel = "stylesheet" th:href= "@{/dist/login.css}" >
+    <title>Login</title>
+</head>
+<body>
+<div class = "container-fluid" style = "height: 800px;">
+    <div class = "d-flex justify-content-center align-items-center h-100 w-100">
+        <div class = "bg-white" style = "width: 75%; border-radius: 15px;">
+            <div class = "h-100">
+                <div class = "row h-100">
+                    <div class = "col-xl-6 col-lg-6">
+                        <div class = "logo">
+                            <div class = "h-100 w-100">
+                                <img th:src = "@{/dist/img/login.jpg}" class = "h-100 w-100">
+                            </div>
+                        </div>
+                    </div>
+
+                    <form class = "col-xl-6 col-lg-6 col-md-12 col-sm-12" th:action="@{/do-login}" method="post">
+                        <div class = "d-flex justify-content-center align-items-center h-100 w-100">
+                            <div class = "inputlogin" style = "border-radius: 40px;">
+                                <div class = "mx-3">
+                                    <div class = "mt-4 d-flex justify-content-center align-items-center">
+                                        <h3 class = "fw-bold">Sign In</h3>
+                                    </div>
+
+                                    <div th:if = "${param.error}" class="alert alert-danger text-center">
+                                            Sai username hoặc password
+                                    </div>
+                                    
+
+                                    <div class = "row mt-5 justify-content-center">
+                                        <div class="col-10">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                        <span class="input-group-text"  style="background-color: #d3d3d3; border-radius: 40px 0 0 40px;">
+                                                            <i class="bi bi-person-fill"></i>
+                                                        </span>
+                                                </div>
+                                                <input type="text" class="form-control" id="username" name="username"  placeholder="Nhập email" style="background-color: #d3d3d3; border-radius: 0 40px 40px 0;" required>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class = "row mt-4 justify-content-center">
+                                        <div class="col-10">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                        <span class="input-group-text" id="basic-addon1" style="background-color: #d3d3d3; border-radius: 40px 0 0 40px;">
+                                                            <i class="bi bi-key-fill"></i>
+                                                        </span>
+                                                </div>
+                                                <input type="text" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu" style="background-color: #d3d3d3; border-radius: 0 40px 40px 0;" required>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class = "row justify-content-center mt-5">
+                                    <div class = "col-6">
+                                        <button type = "submit" class = "btn form-control btn-primary shadow-lg" >Login</button>
+                                    </div>
+                                </div>
+
+                                <div class="text-center mt-3">
+                                    <a class="small" th:href = "@{/register}" href="register.html">Create an Account!</a>
+                                </div>
+                            </div>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" th:href="@{/dist/bootstrapdist/css/bootstrap.min.css}" >
+    <link th:href = "@{/dist/bootstrap-icons/font/bootstrap-icons.min.css}" rel="stylesheet">
+    <script th:src="@{/dist/bootstrapdist/js/bootstrap.bundle.js}"></script>
+    <script th:src = "@{/dist/jquery-3.7.1.js}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script th:src = "@{/dist/fix.js}" type="text/javascript" src="../static/dist/fix.js"></script>
+    <link rel = "stylesheet" th:href= "@{/dist/main.css}" >
+    <title>Biểu đồ</title>
+</head>
+<body>
+<div class = "header container-fluid fixed-top" style = "background-color: rgb(255, 136, 136); height:60px">
+    <div class="w-100 h-100 d-flex justify-content-between">
+        <div class=" mx-4 h-100 w-25 d-flex justify-content-start align-items-center">
+            <a th:href ="@{/home}" href = "home.html"><span style = "font-size: 2rem; color:white"><i class="bi bi-house-fill"></i></span></a>
+        </div>
+
+        <div class="h-100 d-flex justify-content-end align-items-center">
+            <a href="#"><span class = "mx-3" style = "font-size: 1.6rem; color:white"><i class="bi bi-search"></i></span></a>
+            <div class="notification-container mx-3 d-flex justify-content-end align-items-center">
+                <div class="notification-icon">
+                    <a href="#">
+                        <span class="notification-badge">3</span>
+                        <i class="bi bi-bell" style="font-size: 1.6rem; color: white;"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="email-container mx-3 d-flex justify-content-end align-items-center">
+                <div class="email-icon">
+                    <a href="#">
+                        <span class="email-badge">3</span>
+                        <i class="bi bi-envelope" style="font-size: 1.6rem; color: white;"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class = "mx-3 d-flex justify-content-center align-items-center text-white">
+                <div class = "rounded-circle" style = "height: 40px; width: 40px; margin-right: 1rem;">
+                    <a href = "#"><img th:src = "@{/dist/img/kim.jpg}" class = "h-100 w-100"></a>
+                </div>
+
+                <strong style = "font-size: 15px; margin: 0;" th:text="${loggedInUser}"></strong>
+            </div>
+
+            <a data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <i class="bi bi-box-arrow-right" style="font-size: 1.6rem; color: white;"></i>
+            </a>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Xác nhận đăng xuất</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc chắn muốn đăng xuất không?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <a th:href="@{/home-login?logout}" href="homelogin.html" class="btn btn-primary">Đăng xuất</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div style = "height: 60px;"></div>
+
+<div class="w-100 h-100">
+    <div class = "row h-100">
+        <div class="position-fixed fixed-left ol-xl-2 col-lg-2 col-sm-2 col-md-2" style = "background-color: rgb(255, 255, 255); padding: 0px; border-right: 2px solid rgb(211, 207, 207); overflow-y: auto;">
+            <nav class="navbar navbar-light py-0" style = "border-bottom: 2px solid rgb(211, 207, 207); color:rgb(211, 207, 207);">
+                <ul class="navbar-nav text-primary w-100" id="nav-listx" style="padding-left: 0;">
+                    <li class="nav-item py-2 active" style="list-style-type: none;">
+                        <a href="#" class="nav-link d-block" style="display: flex; align-items: center;">
+                            <i class="bi bi-bar-chart-line-fill mx-4" style = "color: black"></i>
+                            <span style = "color: black">Biểu đồ</span>
+                        </a>
+                    </li>
+                    <li class="nav-item py-2" style="list-style-type: none;">
+                        <a th:href="@{/default(cancel=true)}" href="dashboard.html" class="nav-link d-block" style="display: flex; align-items: center;">
+                            <i class="bi bi-people-fill mx-4"></i>
+                            <span>Quản lý khách hàng</span>
+                        </a>
+                    </li>
+                    </li>
+                    <li class="nav-item py-2" style="list-style-type: none;">
+                        <a href="#" class="nav-link d-block" style="display: flex; align-items: center;">
+                            <i class="bi bi-box-seam-fill mx-4"></i>
+                            <span>Quản lý sản phẩm</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <nav class="navbar navbar-light py-0" style = "border-bottom: 2px solid rgb(211, 207, 207);">
+                <ul class="navbar-nav text-primary w-100" id="nav-listz" style="padding-left: 0;">
+                    <li class="nav-item py-2" style="list-style-type: none;">
+                        <a href="#" class="nav-link d-block" style="display: flex; align-items: center;">
+                            <i class="bi bi-grid-3x3-gap-fill mx-4"></i>
+                            <span>Quản lý danh mục</span>
+                        </a>
+                    </li>
+                    <li class="nav-item py-2" style="list-style-type: none;">
+                        <a href="#" class="nav-link d-block" style="display: flex; align-items: center;">
+                            <i class="bi bi-shop mx-4"></i>
+                            <span>Quản lý cửa hàng</span>
+                        </a>
+                    </li>
+                    <li class="nav-item py-2" style="list-style-type: none;">
+                        <a href="#" class="nav-link d-block" style="display: flex; align-items: center;">
+                            <i class="bi bi-cash-coin mx-4"></i>
+                            <span>Quản lý doanh thu</span>
+                        </a>
+                    </li>
+                    <li class="nav-item py-2" style="list-style-type: none;">
+                        <a href="#" class="nav-link d-block" style="display: flex; align-items: center;">
+                            <i class="bi bi-clipboard-check mx-4"></i>
+                            <span>Quản lý đơn hàng</span>
+                        </a>
+                    </li>
+                    <li class="nav-item py-2" style="list-style-type: none;">
+                        <a href="#" class="nav-link d-block" style="display: flex; align-items: center;">
+                            <i class="bi bi-gear-fill mx-4"></i>
+                            <span>Cài đặt hệ thống</span>
+                        </a>
+                    </li>
+                    <li class="nav-item py-2" style="list-style-type: none;">
+                        <a href="#" class="nav-link d-block" style="display: flex; align-items: center;">
+                            <i class="bi bi-map-fill mx-4"></i>
+                            <span>Maps</span>
+                        </a>
+                    </li>
+                    <li class="nav-item py-2" style="list-style-type: none;">
+                        <a href="#" class="nav-link d-block" style="display: flex; align-items: center;">
+                            <i class="bi bi-star-fill mx-4"></i>
+                            <span>Tables</span>
+                        </a>
+                    </li>
+                    <li class="nav-item py-2" style="list-style-type: none;">
+                        <a href="#" class="nav-link d-block" style="display: flex; align-items: center;">
+                            <i class="bi bi-envelope-at-fill mx-4"></i>
+                            <span>Mails</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <nav class="navbar navbar-light py-0" style = "border-bottom: 2px solid rgb(211, 207, 207);">
+                <h5 class = "w-100 mx-4 mt-3" style = "color: rgb(148, 148, 148); font-size: 17px;">HELP</h5>
+                <ul class="navbar-nav text-primary w-100" id="nav-list" style="padding-left: 0;">
+                    <li class="nav-item py-2" style="list-style-type: none;">
+                        <a href="#" class="nav-link d-block" style="display: flex; align-items: center;">
+                            <i class="bi bi-collection-fill mx-4"></i>
+                            <span>Library</span>
+                        </a>
+                    </li>
+                    <li class="nav-item py-2" style="list-style-type: none;">
+                        <a href="#" class="nav-link d-block" style="display: flex; align-items: center;">
+                            <i class="bi bi-person-raised-hand mx-4"></i>
+                            <span>Support</span>
+                        </a>
+                    </li>
+                    <li class="nav-item py-2" style="list-style-type: none;">
+                        <a href="#" class="nav-link d-block" style="display: flex; align-items: center;">
+                            <i class="bi bi-copy mx-4"></i>
+                            <span>Ul Elements</span>
+                        </a>
+                    </li>
+                    <li class="nav-item py-2" style="list-style-type: none;">
+                        <a href="#" class="nav-link d-block" style="display: flex; align-items: center;">
+                            <i class="bi bi-file-earmark-text-fill mx-4"></i>
+                            <span>Forms</span>
+                        </a>
+                    </li>
+                    <li class="nav-item py-2" style="list-style-type: none;">
+                        <a href="#" class="nav-link d-block" style="display: flex; align-items: center;">
+                            <i class="bi bi-bar-chart-line-fill mx-4"></i>
+                            <span>Chart</span>
+                        </a>
+                    </li>
+                    <li class="nav-item py-2" style="list-style-type: none;">
+                        <a href="#" class="nav-link d-block" style="display: flex; align-items: center;">
+                            <i class="bi bi-map-fill mx-4"></i>
+                            <span>Maps</span>
+                        </a>
+                    </li>
+                    <li class="nav-item py-2" style="list-style-type: none;">
+                        <a href="#" class="nav-link d-block" style="display: flex; align-items: center;">
+                            <i class="bi bi-star-fill mx-4"></i>
+                            <span>Extra</span>
+                        </a>
+                    </li>
+                    <li class="nav-item py-2" style="list-style-type: none;">
+                        <a href="#" class="nav-link d-block" style="display: flex; align-items: center;">
+                            <i class="bi bi-menu-up mx-4"></i>
+                            <span>Menu Levels</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class = "col-xl-2 col-lg-2 col-sm-2 col-md-2"></div>
+
+        <div class = "col-xl-10 col-lg-10 col-sm-10 col-md-10 mt-5">
+            <div class = "mx-5">
+                <h3 class="text-center my-4">Biểu đồ quản lý khách hàng</h3>
+                <div class = "d-flex justify-content-between align-content-center mx-5">
+                    <div style="width: 400px; height: 400px;" class="mx-3 d-flex flex-column justify-content-between align-content-center">
+                        <canvas id="myDoughnutChart" class = "w-100 h-100"></canvas>
+                        <h5 class = "text-center mt-3">Biểu đồ tròn</h5>
+                    </div>
+                    <div style="width: 300px; height: 400px;" class="mx-3  d-flex flex-column justify-content-between align-content-center">
+                        <canvas id="myBarChart" class = "w-100 h-100"></canvas>
+                        <h5 class = "text-center mt-3">Biểu đồ cột</h5>
+                    </div>
+                </div>
+                <script th:inline="javascript">
+                    var adminCount = [[${adminCount}]];
+                    var userCount = [[${userCount}]];
+                    const data = {
+                        labels: [
+                            'ADMIN',
+                            'USER',
+                        ],
+                        datasets: [{
+                            label: 'My First Dataset',
+                            data: [adminCount, userCount],
+                            backgroundColor: [
+                                'rgb(255, 99, 132)',
+                                'rgb(255, 205, 86)'
+                            ],
+                            hoverOffset: 4
+                        }]
+                    };
+
+                    var ctx = document.getElementById('myDoughnutChart').getContext('2d');
+                    var ctxBar = document.getElementById('myBarChart').getContext('2d');
+                    var myDoughnutChart = new Chart(ctx, {
+                        type: 'doughnut',
+                        data: data,
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    position: 'top',
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function(tooltipItem) {
+                                            return tooltipItem.label + ': ' + tooltipItem.raw.toFixed(2);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+
+                    var myBarChart = new Chart(ctxBar, {
+                        type: 'bar',
+                        data: data,
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    display: false,
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function(tooltipItem) {
+                                            return tooltipItem.label + ': ' + tooltipItem.raw;
+                                        }
+                                    }
+                                }
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    ticks: {
+                                        callback: function(value) {
+                                            return Number.isInteger(value) ? value : null;
+                                        },
+                                        stepSize: 1
+                                    }
+                                }
+                            }
+                        }
+                    });
+                </script>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

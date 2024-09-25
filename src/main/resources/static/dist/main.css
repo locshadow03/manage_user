@@ -1,0 +1,155 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: #f9e2fa;
+    overflow-x: hidden;
+}
+
+/* icon search */
+.notification-container {
+    position: relative;
+    display: inline-block;
+}
+
+.notification-icon {
+    position: relative;
+    display: inline-block;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: rgb(255, 214, 102);
+    color: white;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 10px;
+    line-height: 20px;
+}
+
+.bi-bell {
+    font-size: 1.5rem;
+    color: white;
+}
+
+/* icon email */
+
+email-container {
+    position: relative;
+    display: inline-block;
+}
+
+.email-icon {
+    position: relative;
+    display: inline-block;
+}
+
+.email-badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: rgb(110, 153, 255);
+    color: white;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 10px;
+    line-height: 20px;
+}
+
+cart-container {
+    position: relative;
+    display: inline-block;
+}
+
+.cart-icon {
+    position: relative;
+    display: inline-block;
+}
+
+.cart-badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: rgb(110, 153, 255);
+    color: white;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 10px;
+    line-height: 20px;
+}
+
+.bi-envelope{
+    font-size: 1.5rem;
+    color: white;
+}
+
+/* avt */
+
+.rounded-circle {
+    overflow: hidden; 
+    display: inline-block;
+}
+
+.rounded-circle img {
+    object-fit: cover;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+
+
+.fixed-left {
+    top: 60px;
+    left: 0;
+    height: 100%;
+}
+
+.active{
+    background-color: rgb(219, 232, 244);
+}  
+
+span {
+    color: rgb(148, 148, 148);
+}
+
+nav i{
+    color: rgb(148, 148, 148);
+}
+.search-input {
+    width: 600px;
+    margin: 0 auto;
+    position: relative;
+}
+.form-control {
+    padding-right: 3rem;
+}
+.input-group-append {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 3rem;
+}
+.input-group-append button {
+    width: 100%;
+    height: 100%;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+#tbao{
+    position: fixed;
+    top:100px;
+    right: 10px;
+    z-index: 1050;
+}
